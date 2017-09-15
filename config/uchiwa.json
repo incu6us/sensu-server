@@ -1,0 +1,20 @@
+{
+    "sensu": [{
+        "name": "sensu",
+        "host": "sensu",
+        "port": 4567
+    }],
+
+    "uchiwa": {
+        "host": "0.0.0.0",
+        "port": 3000,
+        "refresh": 10,
+        "loglevel": "info",
+        "users": [{
+            "username": "incu6us",
+            "password": "666666",
+            "accessToken": "aW5jdTZ1czo2NjY2NjYK",
+            "readonly": false
+        }]
+    }
+}

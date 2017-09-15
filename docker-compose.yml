@@ -1,0 +1,46 @@
+version: '2.1'
+
+  services:
+
+    api:
+      image: sstarcher/sensu
+      restart: on-failure
+      command: api
+      environment:
+        REDIS_PASSWORD: 666666
+        REDIS_RECONNECT_ON_ERROR: "true"
+      links:
+        - redis
+
+    server:
+      image: sstarcher/sensu
+      restart: on-failure
+      command: server
+      environment:
+        REDIS_PASSWORD: 666666
+        REDIS_RECONNECT_ON_ERROR: "true"
+      links:
+        - redis
+        - api
+
+    uchiwa:
+      image: sstarcher/uchiwa
+      restart: on-failure
+      environment:
+          SENSU_DC_NAME: sensu
+          SENSU_HOSTNAME: sensu
+          SENSU_SERVICE_PORT: 4567
+      links:
+        - api:sensu
+      volumes:
+        - ./config/uchiwa.json:/etc/sensu/uchiwa.json
+      ports:
+        - '3001:3000'
+
+    redis:
+      image: tutum/redis
+      restart: on-failure
+      environment:
+          REDIS_PASS: 666666
+      ports:
+        - '6379:6379'
