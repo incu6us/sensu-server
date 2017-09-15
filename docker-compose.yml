@@ -24,7 +24,7 @@ services:
       - api
 
   uchiwa:
-    image: sstarcher/uchiwa
+    build: uchiwa/
     restart: on-failure
     environment:
       SENSU_DC_NAME: sensu
