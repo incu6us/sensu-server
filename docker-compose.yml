@@ -29,7 +29,7 @@ services:
     links:
       - api:sensu
     volumes:
-      - ./uchiwa/config/uchiwa.json:/config/config.json
+      - ./uchiwa/config/uchiwa.json:/etc/uchiwa/config.json
     ports:
       - '3001:3000'
 

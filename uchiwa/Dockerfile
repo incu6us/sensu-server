@@ -1,7 +1,6 @@
 FROM uchiwa/uchiwa
 
-COPY config/uchiwa.json /config/uchiwa.json
-
+RUN mkdir /etc/uchiwa
 EXPOSE 3000
 
-CMD ["/go/bin/uchiwa", "-c", "/config/config.json"]
+CMD ["/go/bin/uchiwa", "-c", "/etc/uchiwa/config.json"]

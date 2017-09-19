@@ -8,7 +8,7 @@ api:
     REDIS_RECONNECT_ON_ERROR: "true"
   links:
     - redis
-    
+
 server:
   image: sstarcher/sensu
   command: server
@@ -18,18 +18,17 @@ server:
   links:
     - redis
     - api
-    
-uchiwa:
-  image: sstarcher/uchiwa
-  environment:
-      SENSU_DC_NAME: sensu
-      SENSU_HOSTNAME: sensu
-      SENSU_SERVICE_PORT: 4567
-  links:
-    - api:sensu
-  ports:
-    - '3001:3000'
-    
+
+  uchiwa:
+    build: uchiwa/
+    restart: on-failure
+    links:
+      - api:sensu
+    volumes:
+      - ./uchiwa/config/uchiwa.json:/etc/uchiwa/config.json
+    ports:
+      - '3001:3000'
+
 redis:
   image: tutum/redis
   environment:
