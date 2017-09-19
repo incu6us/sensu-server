@@ -1,6 +1,6 @@
 FROM uchiwa/uchiwa
 
-ADD config/uchiwa.json /config/uchiwa.json
+COPY config/uchiwa.json /config/uchiwa.json
 
 EXPOSE 3000
 

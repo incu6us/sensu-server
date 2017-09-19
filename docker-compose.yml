@@ -26,14 +26,10 @@ services:
   uchiwa:
     build: uchiwa/
     restart: on-failure
-    environment:
-      SENSU_DC_NAME: sensu
-      SENSU_HOSTNAME: sensu
-      SENSU_SERVICE_PORT: 4567
     links:
       - api:sensu
     volumes:
-      - ./config/uchiwa.json:/etc/sensu/uchiwa.json
+      - ./uchiwa/config/uchiwa.json:/config/config.json
     ports:
       - '3001:3000'
 
