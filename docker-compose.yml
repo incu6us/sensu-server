@@ -19,6 +19,9 @@ services:
     environment:
       REDIS_PASSWORD: 666666
       REDIS_RECONNECT_ON_ERROR: "true"
+    volumes:
+      - ./sensu/check.d:/etc/sensu/check.d
+      - ./sensu/handlers:/etc/sensu/handlers/
     links:
       - redis
       - api
