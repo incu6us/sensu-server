@@ -82,10 +82,7 @@ enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 
 # Install custom plugins inside container
 ```
+/opt/sensu/embedded/bin/gem sources --remove https://rubygems.org/
+/opt/sensu/embedded/bin/gem sources --add http://rubygems.org/
 /opt/sensu/embedded/bin/gem install sensu-plugins-slack -r --source http://rubygems.org/
-```
-or
-```
-curl -Ls https://raw.githubusercontent.com/rubygems/rubygems/master/lib/rubygems/ssl_certs/rubygems.org/AddTrustExternalCARoot-2048.pem -o /opt/sensu/embedded/lib/ruby/2.4.0/rubygems/ssl_certs/AddTrustExternalCARoot-2048.pem
-/opt/sensu/embedded/bin/gem install sensu-plugins-slack
 ```
