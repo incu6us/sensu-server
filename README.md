@@ -79,3 +79,8 @@ enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
   }
 }
 ```
+
+# Install custom plugins inside container
+```
+/opt/sensu/embedded/bin/gem install sensu-plugins-slack -r --source http://rubygems.org/
+```
