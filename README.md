@@ -84,5 +84,5 @@ enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 ```
 /opt/sensu/embedded/bin/gem sources --remove https://rubygems.org/
 /opt/sensu/embedded/bin/gem sources --add http://rubygems.org/
-/opt/sensu/embedded/bin/gem install sensu-plugins-slack -r --source http://rubygems.org/
+/opt/sensu/embedded/bin/gem install sensu-plugins-slack
 ```
