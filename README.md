@@ -19,15 +19,15 @@ server:
     - redis
     - api
 
-  uchiwa:
-    build: uchiwa/
-    restart: on-failure
-    links:
-      - api:sensu
-    volumes:
-      - ./uchiwa/config/uchiwa.json:/etc/uchiwa/config.json
-    ports:
-      - '3001:3000'
+uchiwa:
+  build: uchiwa/
+  restart: on-failure
+  links:
+    - api:sensu
+  volumes:
+    - ./uchiwa/config/uchiwa.json:/etc/uchiwa/config.json
+  ports:
+    - '3001:3000'
 
 redis:
   image: tutum/redis
@@ -80,9 +80,44 @@ enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 }
 ```
 
-# Install custom plugins inside container
+# Server customization
+### Install custom plugins inside container
 ```
 /opt/sensu/embedded/bin/gem sources --remove https://rubygems.org/
 /opt/sensu/embedded/bin/gem sources --add http://rubygems.org/
 /opt/sensu/embedded/bin/gem install sensu-plugins-slack
+```
+
+### Slack handler config
+*/etc/sensu/handlers/slack-handler.json:
+```
+{
+  "handlers": {
+    "slack": {
+      "type": "pipe",
+      "command": "handler-slack.rb",
+      "severites": ["ok", "critical", "unknown", "warning"]
+      }
+    },
+    "slack": {
+      "webhook_url": "https://hooks.slack.com/services/HIDDEN/SECRET",
+      "template" : "",
+      "dashboard": "http://HOST:PORT/#/client/$DataCenter/"
+  }
+}
+```
+
+##### make slack as a default notification handler
+*/etc/sensu/handlers/default-handlers.json:
+```
+{
+  "handlers": {
+    "default": {
+      "type": "set",
+      "handlers": [
+        "slack"
+      ]
+    }
+  }
+}
 ```
