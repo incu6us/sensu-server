@@ -89,7 +89,7 @@ enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 ```
 
 ### Slack handler config
-*/etc/sensu/handlers/slack-handler.json:
+*/etc/sensu/handlers/slack-handler.json*:
 ```
 {
   "handlers": {
@@ -108,7 +108,7 @@ enabled=1' | sudo tee /etc/yum.repos.d/sensu.repo
 ```
 
 ##### make slack as a default notification handler
-*/etc/sensu/handlers/default-handlers.json:
+*/etc/sensu/handlers/default-handlers.json*:
 ```
 {
   "handlers": {
