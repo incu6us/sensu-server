@@ -111,6 +111,32 @@ apt-get install build-essential
 }
 ```
 
+### EMail handler config ([sensu-plugins-mailer](https://github.com/sensu-plugins/sensu-plugins-mailer))
+*/etc/sensu/handlers/mailer-handler.json*:
+```
+{
+  "mailer": {
+    "admin_gui": "http://example.com:3000/",
+    "mail_from": "username@gmail.com",
+    "mail_to": [
+        "some_other_user@gmail.com"
+    ],
+    "smtp_address": "smtp.gmail.com",
+    "smtp_port": "465",
+    "smtp_domain": "gmail.com",
+    "smtp_use_tls": "true",
+    "smtp_username" : "username@gmail.com",
+    "smtp_password" : "p@ssw0rd"
+  },
+  "handlers": {
+    "mailer": {
+      "type": "pipe",
+      "command": "handler-mailer.rb"
+    }
+  }
+}
+```
+
 ##### make slack as a default notification handler
 */etc/sensu/handlers/default-handlers.json*:
 ```
@@ -119,7 +145,8 @@ apt-get install build-essential
     "default": {
       "type": "set",
       "handlers": [
-        "slack"
+        "slack",
+        "mailer"
       ]
     }
   }
