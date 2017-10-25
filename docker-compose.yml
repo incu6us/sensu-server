@@ -22,6 +22,8 @@ services:
     volumes:
       - ./sensu/check.d:/etc/sensu/check.d
       - ./sensu/handlers:/etc/sensu/handlers/
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
     links:
       - redis
       - api
